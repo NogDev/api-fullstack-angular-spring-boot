@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author andersonnogueira
@@ -51,7 +54,12 @@ public class Pessoa {
 	public Boolean getAtivo() {
 		return ativo;
 	}
-
+	@JsonIgnore
+	@Transactional
+	public Boolean isInativo() {
+		return !this.ativo;
+	}
+	
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
